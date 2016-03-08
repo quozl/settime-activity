@@ -1,0 +1,7 @@
+[Activity]
+name = SetTime
+activity_version = 1
+bundle_id = org.sugarlabs.SetTime
+exec = sugar-activity activity.SetTime
+icon = activity-settings
+license = GPLv2+
