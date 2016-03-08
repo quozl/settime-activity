@@ -68,17 +68,17 @@ class SetTime(activity.Activity):
         zone = time[pos+1:]
         time = time[:pos]
         if not zone == self.zone:
-            cmd = "sudo cp /usr/share/zoneinfo/"+zone+' /etc/localtime'
+            cmd = "su -c 'cp /usr/share/zoneinfo/"+zone+" /etc/localtime'"
             print 'cmd', cmd
             call(cmd, shell=True)
         print 'time', len(time), time
         self.settime.set_text(time)
-        cmd = 'sudo date --set "'+time+'"'
+        cmd = "su -c 'date --set \""+time+"\"'"
         print 'cmd', cmd
         pid = Popen(cmd,stdout=PIPE,stderr=PIPE, shell=True)
         result, err = pid.communicate()
         print 'date result', result, 'err', err
-        cmd = 'sudo hwclock -w'
+        cmd = "su -c '/usr/sbin/hwclock -w'"
         pid=Popen(cmd, stdout=PIPE, stderr=PIPE,  shell=True)
         result, err = pid.communicate()
         print 'hwclock result', result, 'err', err
